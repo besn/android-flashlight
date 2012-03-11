@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">besn\'s Taschenlampe</string>
+    <string name="madebyme">made 2012 by Andi \"besn\" Mery</string>
+    <string name="quit">Quit</string>
+    <string name="about">About</string>
+    <color name="all_white">#FFFFFF</color>
+    <color name="all_black">#000000</color>
+</resources>
