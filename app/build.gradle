@@ -2,15 +2,14 @@ apply plugin: 'android'
 apply from: '../../flashlight-sign.gradle';
 
 android {
-    compileSdkVersion 16
+    compileSdkVersion 7
     buildToolsVersion '20.0.0'
-
     defaultConfig {
-        applicationId "at.besn.flashlight"
+        applicationId 'at.besn.flashlight'
         minSdkVersion 7
         targetSdkVersion 7
         versionCode 1
-        versionName "1.1"
+        versionName '1.1'
     }
     buildTypes {
         release {
@@ -23,6 +22,8 @@ android {
             debuggable true
             runProguard false
         }
+    }
+    productFlavors {
     }
 }
 
