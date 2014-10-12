@@ -2,13 +2,10 @@
 <resources>
 
     <string name="app_name">Flashlight</string>
-
     <string name="madebyme">made 2012 by Andi \"besn\" Mery</string>
-    <string name="menu_quit">Quit</string>
     <string name="menu_about">About</string>
     <string name="title_about_activity">About Flashlight</string>
 
     <color name="all_white">#FFFFFF</color>
-    <color name="all_black">#000000</color>
 
 </resources>

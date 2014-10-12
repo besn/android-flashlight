@@ -1,0 +1,31 @@
+apply plugin: 'android'
+apply from: '../../flashlight-sign.gradle';
+
+android {
+    compileSdkVersion 16
+    buildToolsVersion '20.0.0'
+
+    defaultConfig {
+        applicationId "at.besn.flashlight"
+        minSdkVersion 7
+        targetSdkVersion 7
+        versionCode 1
+        versionName "1.1"
+    }
+    buildTypes {
+        release {
+            debuggable false
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            runProguard false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
