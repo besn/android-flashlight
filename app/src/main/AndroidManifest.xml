@@ -1,12 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.besn.flashlight">
 
-    <application android:allowBackup="true"
+    <application
+        android:allowBackup="true"
         android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher">
+        android:icon="@drawable/ic_launcher"
+        android:name=".FlashLightApplication">
         <activity
             android:name=".FlashLightActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -15,7 +17,7 @@
         </activity>
         <activity
             android:name=".FlashLightAboutScreenActivity"
-            android:label="@string/title_about_activity" >
+            android:label="@string/title_about_activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="at.besn.flashlight.FlashLightActivity" />
