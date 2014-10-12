@@ -31,7 +31,7 @@ public class FlashLightActivity extends Activity {
     lp.screenBrightness = 1.0f;
     getWindow().setAttributes(lp);
 
-    setContentView(R.layout.main);
+    setContentView(R.layout.activity_flashlight);
   }
 
   @Override
