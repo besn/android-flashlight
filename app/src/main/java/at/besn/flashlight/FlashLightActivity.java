@@ -61,40 +61,4 @@ public class FlashLightActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
-    public void onRestart() {
-        Log.i(getClass().getName(), "onRestart");
-        super.onRestart();
-    }
-
-    @Override
-    public void onStart() {
-        Log.i(getClass().getName(), "onStart");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        Log.i(getClass().getName(), "onResume");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.i(getClass().getName(), "onPause");
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Log.i(getClass().getName(), "onStop");
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i(getClass().getName(), "onDestroy");
-        super.onDestroy();
-    }
 }
