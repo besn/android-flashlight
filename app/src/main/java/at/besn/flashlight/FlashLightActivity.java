@@ -1,8 +1,10 @@
 package at.besn.flashlight;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,10 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 public class FlashLightActivity extends Activity {
-
-  public SharedPreferences sharedPrefs;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,20 @@ public class FlashLightActivity extends Activity {
     // ...and keep the screen from fading to black
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+    // Get the shared preferences
+    SharedPreferences sharedPrefs = this.getSharedPreferences("at.besn.flashlight", Context.MODE_PRIVATE);
+
     // Make the screen full bright for this activity.
     WindowManager.LayoutParams lp = getWindow().getAttributes();
-    lp.screenBrightness = 1.0f;
+    lp.screenBrightness = sharedPrefs.getFloat("at.besn.flashlight.brightness", 1.0f);
     getWindow().setAttributes(lp);
 
     setContentView(R.layout.activity_flashlight);
+
+    // Set the flashlights color
+    RelativeLayout flashLightField = (RelativeLayout) this.findViewById(R.id.flashLightField);
+    flashLightField.setBackgroundColor(Color.parseColor(sharedPrefs.getString("at.besn.flashlight.color", "#FFFFFF")));
+    flashLightField.invalidate();
   }
 
   @Override
