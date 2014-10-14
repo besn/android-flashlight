@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,7 +13,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
-public class FlashLightActivity extends Activity {
+import afzkl.development.colorpickerview.dialog.ColorPickerDialog;
+import afzkl.development.colorpickerview.view.ColorPickerView;
+
+public class FlashLightActivity extends Activity implements ColorPickerView.OnColorChangedListener {
+
+    SharedPreferences sharedPrefs;
+
+    static final String PREF_COLOR = "at.besn.flashlight.color";
+    static final String PREF_BRIGHTNESS = "at.besn.flashlight.brightness";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,21 +33,20 @@ public class FlashLightActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // ...and keep the screen from fading to black
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         // Get the shared preferences
-        SharedPreferences sharedPrefs = this.getSharedPreferences("at.besn.flashlight", Context.MODE_PRIVATE);
-
-        // Make the screen full bright for this activity.
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.screenBrightness = sharedPrefs.getFloat("at.besn.flashlight.brightness", 1.0f);
-        getWindow().setAttributes(lp);
+        sharedPrefs = getPreferences(Context.MODE_PRIVATE);
 
         setContentView(R.layout.activity_flashlight);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Make the screen full bright for this activity.
+        setBrightness(sharedPrefs.getFloat(PREF_BRIGHTNESS, 1.0f));
         // Set the flashlights color
-        RelativeLayout flashLightField = (RelativeLayout) this.findViewById(R.id.flashLightField);
-        flashLightField.setBackgroundColor(Color.parseColor(sharedPrefs.getString("at.besn.flashlight.color", "#FFFFFF")));
-        flashLightField.invalidate();
+        setColor(sharedPrefs.getInt(PREF_COLOR, -1));
     }
 
     @Override
@@ -54,11 +60,32 @@ public class FlashLightActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.menu_about:
-                startActivity(new Intent(FlashLightActivity.this, FlashLightAboutScreenActivity.class));
+            case R.id.menu_color:
+                ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, sharedPrefs.getInt(PREF_COLOR, -1), this);
+                colorPickerDialog.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onColorChanged(int newColor) {
+        SharedPreferences.Editor edit = sharedPrefs.edit();
+        edit.putInt(PREF_COLOR, newColor);
+        edit.commit();
+        setColor(newColor);
+    }
+
+    private void setBrightness(float brightness) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = brightness;
+        getWindow().setAttributes(lp);
+    }
+
+    private void setColor(int color) {
+        RelativeLayout flashLightField = (RelativeLayout) this.findViewById(R.id.flashLightField);
+        flashLightField.setBackgroundColor(color);
+        flashLightField.invalidate();
     }
 }

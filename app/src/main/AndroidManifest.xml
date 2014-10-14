@@ -14,13 +14,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FlashLightAboutScreenActivity"
-            android:label="@string/title_about_activity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="at.besn.flashlight.FlashLightActivity" />
-        </activity>
     </application>
 
 </manifest>
